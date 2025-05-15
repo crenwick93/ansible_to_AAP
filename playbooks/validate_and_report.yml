@@ -1,0 +1,26 @@
+---
+- name: Validate and report
+  hosts: demo-app
+  become: true
+  tasks:
+    - name: Ensure NGINX is active
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Validate homepage
+      ansible.builtin.uri:
+        url: "http://{{ inventory_hostname }}"
+        validate_certs: false
+        return_content: true
+      register: homepage_check
+
+    - name: Print confirmation
+      ansible.builtin.debug:
+        msg: "✅ NGINX served: {{ homepage_check.content | truncate(50, True) }}"
+
+    - name: Set success stats
+      ansible.builtin.set_stats:
+        data:
+          nginx_demo_successful: true

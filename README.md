@@ -1,2 +1,3 @@
-# ansible_to_AAP
-Demo project for command line ansible to running on AAP
+# ansible to AAP
+
+ansible-navigator run configure_nginx.yml

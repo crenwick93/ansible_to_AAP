@@ -1,0 +1,6 @@
+ansible.cfg
+ansible-navigator.log
+collections
+!collections/requirements.yml
+platform_configs/auth
+context
