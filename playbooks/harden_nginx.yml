@@ -1,17 +1,17 @@
 - name: Apply basic hardening
-  hosts: demo-app
+  hosts: all
   become: true
   tasks:
-    - name: Disable server tokens in nginx.conf
-      ansible.builtin.lineinfile:
-        path: /etc/nginx/nginx.conf
-        regexp: '^.*server_tokens.*$'
-        line: '    server_tokens off;'
-        insertafter: '^http'
+        - name: Disable server tokens in nginx.conf
+          ansible.builtin.lineinfile:
+            path: /etc/nginx/nginx.conf
+            regexp: '^.*server_tokens.*$'
+            line: '    server_tokens off;'
+            insertafter: '^http'
 
-    - name: Set strict permissions on web content
-      ansible.builtin.file:
-        path: /usr/share/nginx/html/index.html
-        mode: '0644'
-        owner: root
-        group: root
+        - name: Set strict permissions on web content
+          ansible.builtin.file:
+            path: /usr/share/nginx/html/index.html
+            mode: '0644'
+            owner: root
+            group: root
